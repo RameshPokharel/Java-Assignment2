@@ -14,9 +14,9 @@ import java.util.Arrays;
  */
 public class MAPAnalyser {
 
-    String identifiers[] = new String[]{"Ramesh", "Arjun", "Krishna", "Harry", "Admand", "Nick", "Mahesh"};
-    int sbp[] = new int[]{20, 50, 200, 45, 63, 45, 67};
-    int dbp[] = new int[]{123, 100, 56, 34, 55, 67, 99};
+    String identifiers[] = new String[]{"Ramesh", "Arjun", "Krishna", "Harry", "Admand", "Nick", "Mahesh","Hari","Gokarna"};
+    int sbp[] = new int[]{20, 50, 200, 45, 63, 45, 67,90,45};
+    int dbp[] = new int[]{123, 100, 56, 67, 55, 67, 99,134,98};
 
     private int nrecords;
     private Record data[];

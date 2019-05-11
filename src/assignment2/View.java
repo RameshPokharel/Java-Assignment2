@@ -29,7 +29,7 @@ public class View {
     /**
      * command message to perform user input
      */
-    public void commandMessage() {
+    private void commandMessage() {
         System.out.println("The following commands are recognised");
         System.out.println("Display this message                                   > 0");
         System.out.println("Display a specific subject record:                     > 1 id");
