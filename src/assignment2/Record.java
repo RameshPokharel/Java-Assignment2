@@ -17,6 +17,14 @@ public class Record {
     int map;
     String category;
 
+    /**
+     *
+     * @param id identifier of Record
+     * @param sbp
+     * @param dbp
+     * @param map
+     * @param category
+     */
     public Record(String id,
             int sbp,
             int dbp,

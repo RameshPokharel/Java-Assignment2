@@ -17,7 +17,7 @@ public class Assignment2 {
     public static void main(String[] args) {
         MAPAnalyser a = new MAPAnalyser();
         View v = new View(a);
-        v.commandLoop();		// does nothing
+        v.commandLoop();		
 
     }
 

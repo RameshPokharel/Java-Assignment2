@@ -14,18 +14,25 @@ import java.util.Arrays;
  */
 public class MAPAnalyser {
 
-    String identifiers[] = new String[]{"Ramesh", "Arjun"};
-    int sbp[] = new int[]{20, 50};
-    int dbp[] = new int[]{123, 100};
-    int nrecords = identifiers.length;
-    Record data[];
+    String identifiers[] = new String[]{"Ramesh", "Arjun", "Krishna", "Harry", "Admand", "Nick", "Mahesh"};
+    int sbp[] = new int[]{20, 50, 200, 45, 63, 45, 67};
+    int dbp[] = new int[]{123, 100, 56, 34, 55, 67, 99};
+
+    private int nrecords;
+    private Record data[];
 
     public MAPAnalyser() {
+        nrecords = identifiers.length;
         data = new Record[nrecords];
         loadFromTables();
         sortById();
     }
 
+    /**
+     *
+     * @param id is identifier of Record
+     * @return object of Record
+     */
     public Record find(String id) {
         Record cRec = null;
 
@@ -45,6 +52,30 @@ public class MAPAnalyser {
         return cRec;
     }
 
+    /**
+     * perform search operation to find Records within specified range
+     *
+     * @param minMap minimum MAP value
+     * @param maxMap maximum MAP value
+     * @return array of Record
+     */
+    public Record[] find(int minMap, int maxMap) {
+        ArrayList<Record> mylist = new ArrayList<Record>();
+        for (int i = 0; i < data.length; i++) {
+            {
+                if (data[i].getMap() >= minMap && data[i].getMap() <= maxMap) {
+                    mylist.add(data[i]);
+                }
+            }
+        }
+        return mylist.toArray(new Record[mylist.size()]);
+    }
+
+    /**
+     * Highest MAP value
+     *
+     * @return highest MAP value from Records
+     */
     public int highest() {
 
         int max = data[0].getMap();
@@ -59,6 +90,11 @@ public class MAPAnalyser {
         return max;
     }
 
+    /**
+     * Lowest MAP value
+     *
+     * @return lowest MAP value from Records
+     */
     public int lowest() {
         int min = data[0].getMap();;
 
@@ -73,6 +109,11 @@ public class MAPAnalyser {
         return min;
     }
 
+    /**
+     * Median MAP value
+     *
+     * @return median MAP value from Records
+     */
     public int median() {
 
         int median = 0;
@@ -93,19 +134,10 @@ public class MAPAnalyser {
         return median;
     }
 
-    public Record[] find(int map1, int map2) {
-        // no records found
-        ArrayList<Record> mylist = new ArrayList<Record>();
-        for (int i = 0; i < data.length; i++) {
-            {
-                if (data[i].getMap() >= map1 && data[i].getMap() <= map2) {
-                    mylist.add(data[i]);
-                }
-            }
-        }
-        return mylist.toArray(new Record[mylist.size()]);
-    }
-
+    /**
+     *
+     * Perform selection sort algorithm to sort Records in array
+     */
     private void sortById() {
 
         int n = data.length;
@@ -128,6 +160,9 @@ public class MAPAnalyser {
         }
     }
 
+    /**
+     * construct Record objects and add them to the data array.
+     */
     private void loadFromTables() {
 
         int cPos = 0;
@@ -145,16 +180,10 @@ public class MAPAnalyser {
     }
 
     /**
-     * calculate Mean Arterial Pressure
-     *
-     * @param sbp systolic blood pressure
-     * @param dbp diastolic blood pressure
-     * @return MAP (Mean Arterial Pressure )
+     * classify MAP value 
+     * @param map MAP value
+     * @return category 
      */
-    public int calculateMap(int sbp, int dbp) {
-        return (int) (1.0 / 3.0 * sbp + 2.0 / 3.0 * dbp);
-    }
-
     private String classify(int map) {
         if (map < 70) {
             return "low";
@@ -166,4 +195,14 @@ public class MAPAnalyser {
 
     }
 
+    /**
+     * calculate Mean Arterial Pressure
+     *
+     * @param sbp systolic blood pressure
+     * @param dbp diastolic blood pressure
+     * @return MAP (Mean Arterial Pressure )
+     */
+    private int calculateMap(int sbp, int dbp) {
+        return (int) (1.0 / 3.0 * sbp + 2.0 / 3.0 * dbp);
+    }
 }

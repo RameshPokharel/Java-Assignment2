@@ -13,13 +13,40 @@ import java.util.Scanner;
  */
 public class View {
 
+    MAPAnalyser map;
+
+    /**
+     * constructor
+     *
+     * @param map object of MapAnalyer class {@link MAPAnalyser}
+     */
     public View(MAPAnalyser map) {
-        message();
+        this.map = map;
+    }
+
+    /**
+     * command message to perform user input
+     */
+    public void commandMessage() {
+        System.out.println("The following commands are recognised");
+        System.out.println("Display this message                                   > 0");
+        System.out.println("Display a specific subject record:                     > 1 id");
+        System.out.println("Display records for all subject records within a range > 2 map1 map2");
+        System.out.println("Display statistics (minimum, maximum and median)       > 3");
+        System.out.println("Exit the application                                   > 9");
+    }
+
+    /**
+     * takes user command and perform operation this method shows result in
+     * console
+     */
+    public void commandLoop() {
+        commandMessage();
         Scanner sc = new Scanner(System.in);
         int id = sc.nextInt();
         switch (id) {
             case 0:
-                message();
+                commandMessage();
                 break;
             case 1:
                 System.out.println("Enter specific subject record id: ");
@@ -67,24 +94,9 @@ public class View {
 
             default:
                 System.out.println("Invalid commands are provided , please enter valid command ");
-                message();
+                commandLoop();
                 break;
 
         }
-
     }
-
-    private void message() {
-        System.out.println("The following commands are recognised");
-        System.out.println("Display this message                                   > 0");
-        System.out.println("Display a specific subject record:                     > 1 id");
-        System.out.println("Display records for all subject records within a range > 2 map1 map2");
-        System.out.println("Display statistics (minimum, maximum and median)       > 3");
-        System.out.println("Exit the application                                   > 9");
-
-    }
-
-    void commandLoop() {
-    }
-
 }
