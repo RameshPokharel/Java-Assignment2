@@ -5,6 +5,9 @@
  */
 package assignment2;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  *
  * @author Ramesh
@@ -25,44 +28,84 @@ public class MAPAnalyser {
 
     public Record find(String id) {
         Record cRec = null;
-        for (Record rec : data) {
-            if (rec.equals(id)) {
-                cRec = rec;
-                break;
-            }
 
+        int first = 0;
+        int last = data.length;
+
+        while (first < last) {
+            int mid = (first + last) / 2;
+            if (id.compareTo(data[mid].getId()) < 0) {
+                last = mid;
+            } else if (id.compareTo(data[mid].getId()) > 0) {
+                first = mid + 1;
+            } else {
+                return data[mid];
+            }
         }
         return cRec;
     }
 
-    public int lowest() {
+    public int highest() {
         int max = 0;
 
         for (int i = 0; i < data.length; i++) {
             max = data[i].getMap();
 
-            for (int j = i + 1; j < a.length; j++) {
-                if (a[j] > max) {
-                    max = a[j];
+            for (int j = i + 1; j < data.length; j++) {
+                if (data[j].getMap() > max) {
+                    max = data[j].getMap();
                 }
-
             }
         }
-        return 0;
+        return max;
     }
 
-    public int highest() {
-        return 0;
+    public int lowest() {
+        int min = 0;
+
+        for (int i = 0; i < data.length; i++) {
+            min = data[i].getMap();
+
+            for (int j = i + 1; j < data.length; j++) {
+                if (data[j].getMap() < min) {
+                    min = data[j].getMap();
+                }
+            }
+        }
+        return min;
     }
 
     public int median() {
-        return 0;
+
+        int median = 0;
+        ArrayList<Integer> mapList = new ArrayList();
+
+        for (int i = 0; i < data.length; i++) {
+            mapList.add(data[i].getMap());
+        }
+        Arrays.sort(mapList.toArray());
+
+        int n = mapList.size();
+        if (n % 2 == 0) {
+            median = (mapList.get(n / 2) + mapList.get((n / 2) - 1)) / 2;
+        } else {
+            median = mapList.get(n / 2);
+        }
+
+        return median;
     }
 
     public Record[] find(int map1, int map2) {
         // no records found
-        Record[] r = new Record[0];
-        return r;
+        ArrayList<Record> mylist = new ArrayList<Record>();
+        for (int i = 0; i < data.length; i++) {
+            {
+                if (data[i].getMap() >= map1 && data[i].getMap() <= map1) {
+                    mylist.add(data[i]);
+                }
+            }
+        }
+        return mylist.toArray(new Record[mylist.size()]);
     }
 
     private void sortById() {

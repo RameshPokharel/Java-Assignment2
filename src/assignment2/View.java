@@ -16,5 +16,8 @@ public class View {
         
         
     }
+
+    void commandLoop() {
+    }
     
 }
