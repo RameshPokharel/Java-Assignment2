@@ -22,6 +22,8 @@ public class View {
      */
     public View(MAPAnalyser map) {
         this.map = map;
+        commandMessage();
+
     }
 
     /**
@@ -41,12 +43,12 @@ public class View {
      * console
      */
     public void commandLoop() {
-        commandMessage();
         Scanner sc = new Scanner(System.in);
         int id = sc.nextInt();
         switch (id) {
             case 0:
                 commandMessage();
+                commandLoop();
                 break;
             case 1:
                 System.out.println("Enter specific subject record id: ");
@@ -59,6 +61,7 @@ public class View {
                     System.out.println(rec.toString());
                 }
 
+                commandLoop();
                 break;
             case 2:
                 System.out.println("Enter min MAP value and max MAP value to serach within range: ");
@@ -82,11 +85,13 @@ public class View {
 
                 }
 
+                commandLoop();
                 break;
             case 3:
                 System.out.println("Lowest MAP is " + map.lowest());
                 System.out.println("Highest MAP is " + map.highest());
                 System.out.println("Median MAP is " + map.median());
+                commandLoop();
                 break;
             case 9:
                 System.exit(0);
