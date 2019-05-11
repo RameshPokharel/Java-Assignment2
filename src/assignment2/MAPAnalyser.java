@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class MAPAnalyser {
 
     String identifiers[] = new String[]{"Ramesh", "Arjun"};
-    int sbp[] = new int[]{80, 90};
+    int sbp[] = new int[]{20, 50};
     int dbp[] = new int[]{123, 100};
     int nrecords = identifiers.length;
     Record data[];
@@ -34,9 +34,9 @@ public class MAPAnalyser {
 
         while (first < last) {
             int mid = (first + last) / 2;
-            if (id.compareTo(data[mid].getId()) < 0) {
+            if (id.compareToIgnoreCase(data[mid].getId()) < 0) {
                 last = mid;
-            } else if (id.compareTo(data[mid].getId()) > 0) {
+            } else if (id.compareToIgnoreCase(data[mid].getId()) > 0) {
                 first = mid + 1;
             } else {
                 return data[mid];
@@ -46,10 +46,9 @@ public class MAPAnalyser {
     }
 
     public int highest() {
-        int max = 0;
 
+        int max = data[0].getMap();
         for (int i = 0; i < data.length; i++) {
-            max = data[i].getMap();
 
             for (int j = i + 1; j < data.length; j++) {
                 if (data[j].getMap() > max) {
@@ -61,10 +60,9 @@ public class MAPAnalyser {
     }
 
     public int lowest() {
-        int min = 0;
+        int min = data[0].getMap();;
 
         for (int i = 0; i < data.length; i++) {
-            min = data[i].getMap();
 
             for (int j = i + 1; j < data.length; j++) {
                 if (data[j].getMap() < min) {
@@ -100,7 +98,7 @@ public class MAPAnalyser {
         ArrayList<Record> mylist = new ArrayList<Record>();
         for (int i = 0; i < data.length; i++) {
             {
-                if (data[i].getMap() >= map1 && data[i].getMap() <= map1) {
+                if (data[i].getMap() >= map1 && data[i].getMap() <= map2) {
                     mylist.add(data[i]);
                 }
             }
@@ -154,7 +152,7 @@ public class MAPAnalyser {
      * @return MAP (Mean Arterial Pressure )
      */
     public int calculateMap(int sbp, int dbp) {
-        return 1 / 3 * sbp + 2 / 3 * dbp;
+        return (int) (1.0 / 3.0 * sbp + 2.0 / 3.0 * dbp);
     }
 
     private String classify(int map) {
