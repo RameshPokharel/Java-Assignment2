@@ -122,7 +122,6 @@ public class View {
             } catch (InputMismatchException exception) {
                 System.out.println("\tInvalid input type (must be an integer)");
                 sc.nextLine();  // Clear invalid input from scanner buffer.
-
             }
         }
     }
