@@ -5,6 +5,7 @@
  */
 package assignment2;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -44,64 +45,85 @@ public class View {
      */
     public void commandLoop() {
         Scanner sc = new Scanner(System.in);
-        int id = sc.nextInt();
-        switch (id) {
-            case 0:
-                commandMessage();
-                commandLoop();
-                break;
-            case 1:
-                System.out.println("Enter specific subject record id: ");
-                String identifier = sc.next();
-                Record rec = map.find(identifier);
-                if (rec == null) {
-                    System.out.println("'" + identifier + "' not found");
+        while (true) {
+            try {
+                int id = sc.nextInt();
 
-                } else {
-                    System.out.println(rec.toString());
-                }
+                switch (id) {
+                    case 0:
+                        commandMessage();
+                        commandLoop();
+                        break;
 
-                commandLoop();
-                break;
-            case 2:
-                System.out.println("Enter min MAP value and max MAP value to serach within range: ");
-                int minMap = sc.nextInt();
-                int maxMap = sc.nextInt();
+                    case 1:
+                        String identifier = sc.next();
+                        Record rec = map.find(identifier);
+                        if (rec == null) {
+                            System.out.println("'" + identifier + "' not found");
 
-                if (minMap < 0 || maxMap < 0 || minMap > 200 || maxMap > 200) {
-                    System.out.println("invalid range detected !!. Member of the range should be within 0 - 200 ");
-                } else if (minMap > maxMap) {
-                    System.out.println(" First value is min MAP and should be minimum  ");
-                } else {
-                    Record[] records = map.find(minMap, maxMap);
-                    if (records.length < 1) {
-                        System.out.println("No records in this range");
-                    } else {
+                        } else {
+                            System.out.println("----------------------------------------------------------------------");
+                            System.out.printf("%10s %15s %15s %15s", "STUDENT ID", "SBP", "DBP", "MAP");
+                            System.out.println();
+                            System.out.println("----------------------------------------------------------------------");
 
-                        for (Record cRec : records) {
-                            System.out.println(cRec.toString());
+                            System.out.println(rec.toString());
                         }
-                    }
+                        commandLoop();
+                        break;
+
+                    case 2:
+                        //  System.out.println("Enter min MAP value and max MAP value to serach within range: ");
+                        int minMap = sc.nextInt();
+                        int maxMap = sc.nextInt();
+
+                        if (minMap < 0 || maxMap < 0 || minMap > 200 || maxMap > 200) {
+                            System.out.println("invalid range detected !!. Member of the range should be within 0 - 200 ");
+                        } else if (minMap > maxMap) {
+                            System.out.println(" First value is min MAP and should be minimum  ");
+                        } else {
+                            Record[] records = map.find(minMap, maxMap);
+                            if (records.length < 1) {
+                                System.out.println("No records in this range");
+                            } else {
+                                // Print the list objects in tabular format.
+                                System.out.println("----------------------------------------------------------------------");
+                                System.out.printf("%10s %15s %15s %15s", "STUDENT ID", "SBP", "DBP", "MAP");
+                                System.out.println();
+                                System.out.println("----------------------------------------------------------------------");
+
+                                for (Record cRec : records) {
+                                    System.out.print(cRec.toString());
+                                    System.out.println();
+                                }
+                            }
+
+                        }
+                        commandLoop();
+                        break;
+
+                    case 3:
+                        System.out.println("Lowest MAP is " + map.lowest());
+                        System.out.println("Highest MAP is " + map.highest());
+                        System.out.println("Median MAP is " + map.median());
+                        commandLoop();
+                        break;
+
+                    case 9:
+                        System.exit(0);
+                        break;
+
+                    default:
+                        System.out.println("Invalid commands are provided , please enter valid command ");
+                        commandLoop();
+                        break;
 
                 }
+            } catch (InputMismatchException exception) {
+                System.out.println("\tInvalid input type (must be an integer)");
+                sc.nextLine();  // Clear invalid input from scanner buffer.
 
-                commandLoop();
-                break;
-            case 3:
-                System.out.println("Lowest MAP is " + map.lowest());
-                System.out.println("Highest MAP is " + map.highest());
-                System.out.println("Median MAP is " + map.median());
-                commandLoop();
-                break;
-            case 9:
-                System.exit(0);
-                break;
-
-            default:
-                System.out.println("Invalid commands are provided , please enter valid command ");
-                commandLoop();
-                break;
-
+            }
         }
     }
 }

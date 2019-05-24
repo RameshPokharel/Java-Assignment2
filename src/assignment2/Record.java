@@ -102,7 +102,8 @@ public class Record {
 
     @Override
     public String toString() {
-        return "Record{" + "id=" + id + ", sbp=" + sbp + ", dbp=" + dbp + ", map=" + map + ", category=" + category + '}';
+        return String.format("%10s %15s %15s %15d",getId(), getSbp(),getDbp(), getMap());
+        //return "Record{" + "id=" + id + ", sbp=" + sbp + ", dbp=" + dbp + ", map=" + map + ", category=" + category + '}';
     }
 
 }
