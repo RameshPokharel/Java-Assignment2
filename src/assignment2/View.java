@@ -62,10 +62,10 @@ public class View {
                             System.out.println("'" + identifier + "' not found");
 
                         } else {
-                            System.out.println("----------------------------------------------------------------------");
-                            System.out.printf("%10s %15s %15s %15s", "STUDENT ID", "SBP", "DBP", "MAP");
+                            System.out.println("------------------------------------------------------------------------------");
+                            System.out.printf("%10s %15s %15s %15s %15s", "STUDENT ID", "SBP", "DBP", "MAP","CATEGORY");
                             System.out.println();
-                            System.out.println("----------------------------------------------------------------------");
+                            System.out.println("------------------------------------------------------------------------------");
 
                             System.out.println(rec.toString());
                         }
@@ -87,10 +87,10 @@ public class View {
                                 System.out.println("No records in this range");
                             } else {
                                 // Print the list objects in tabular format.
-                                System.out.println("----------------------------------------------------------------------");
-                                System.out.printf("%10s %15s %15s %15s", "STUDENT ID", "SBP", "DBP", "MAP");
+                                System.out.println("------------------------------------------------------------------------------");
+                                System.out.printf("%10s %15s %15s %15s %15s", "STUDENT ID", "SBP", "DBP", "MAP","CATEGORY");
                                 System.out.println();
-                                System.out.println("----------------------------------------------------------------------");
+                                System.out.println("------------------------------------------------------------------------------");
 
                                 for (Record cRec : records) {
                                     System.out.print(cRec.toString());
